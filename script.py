@@ -39,15 +39,15 @@ def text_handler(message):
 
     response = client.responses.create(
         model="gpt-4o-mini",
-        instructions="You are a professional psychologist.",
+        instructions="You are a professional psychologist. You are a chat-bot.",
         input=message.text
     )
 
     if vm == 0:
-        bot.send_message(message.chat.id, response)
+        bot.send_message(message.chat.id, response.text)
     else:
         try:
-            tts = gTTS(text=response, lang='ru')
+            tts = gTTS(text=response.text, lang='ru')
 
             filename = f"voice_{message.id}.mp3"
 
@@ -120,10 +120,10 @@ def voice_handler(message):
             )
 
             if vm == 0:
-                bot.send_message(message.chat.id, response)
+                bot.send_message(message.chat.id, response.text)
             else:
                 try:
-                    tts = gTTS(text=response, lang='ru')
+                    tts = gTTS(text=response.text, lang='ru')
 
                     filename = f"voice_{message.id}.mp3"
 
@@ -139,6 +139,7 @@ def voice_handler(message):
             bot.reply_to(message,"Неудалось обработать.")
     except Exception as e:
         print(e)
+
 
 
 bot.polling(none_stop=True)
