@@ -44,10 +44,10 @@ def text_handler(message):
     )
 
     if vm == 0:
-        bot.send_message(message.chat.id, response.text)
+        bot.send_message(message.chat.id, response.output_text)
     else:
         try:
-            tts = gTTS(text=response.text, lang='ru')
+            tts = gTTS(text=response.output_text, lang='ru')
 
             filename = f"voice_{message.id}.mp3"
 
@@ -120,10 +120,10 @@ def voice_handler(message):
             )
 
             if vm == 0:
-                bot.send_message(message.chat.id, response.text)
+                bot.send_message(message.chat.id, response.output_text)
             else:
                 try:
-                    tts = gTTS(text=response.text, lang='ru')
+                    tts = gTTS(text=response.output_text, lang='ru')
 
                     filename = f"voice_{message.id}.mp3"
 
@@ -143,3 +143,4 @@ def voice_handler(message):
 
 
 bot.polling(none_stop=True)
+
